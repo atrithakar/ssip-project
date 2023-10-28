@@ -1,0 +1,22 @@
+job type list:
+
+<ul class="job_check_list">
+              <li class=" ">
+                <input id="checkbox_qu_01" type="checkbox" class="styled-checkbox">
+                <label for="checkbox_qu_01">
+                  Freelancer
+                </label>
+              </li>
+              <li class=" ">
+                <input id="checkbox_qu_02" type="checkbox" class="styled-checkbox">
+                <label for="checkbox_qu_02">
+                  Part Time
+                </label>
+              </li>
+              <li class=" ">
+                <input id="checkbox_qu_03" type="checkbox" class="styled-checkbox">
+                <label for="checkbox_qu_03">
+                  Full Time
+                </label>
+              </li>
+            </ul>
