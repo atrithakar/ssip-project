@@ -6,7 +6,7 @@ const path = require('node:path');
 // const io = new Server(server);
 
 let applicationStatus = {
-    "status": "Applied Successfully<br>",
+    "status": "Applied Successfully",
     "link": "<a href=\"../index.html\">Go to Home</a>"
 }
 
@@ -64,10 +64,14 @@ app.post('/', (req, res) => {
     let p = path.join(__dirname, 'public')
     res.sendFile(p + '/index.html')
 })
+
+let findJobStatus = {}
 app.post('/findjob', (req, res) => {
     let mydata = new jobseeker(req.body);
     mydata.save().then(() => {
-
+        findJobStatus = {
+            "status":"Your application has been received"
+        }
         res.send('ok')
 
     }).catch(() => {
@@ -108,6 +112,7 @@ app.post('/application', (req, res) => {
 app.get('/api', (req, res) => {
 
     res.json(applicationStatus)
+    // applicationStatus ={}
 })
 
 app.get('/api/subscribed',(req,res)=>{
