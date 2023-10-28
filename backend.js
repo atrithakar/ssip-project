@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 const path = require('node:path');
+// const { Server } = require("socket.io");
+// const io = new Server(server);
 
 let applicationStatus = {
     "status": "Applied Successfully<br>",
@@ -45,6 +47,11 @@ const hostname = '127.0.0.1';
 const port = 3000;
 
 
+app.get('/',(req,res)=>{
+    let p = path.join(__dirname,'public','html')
+    res.sendFile(p+'/login.html')
+})
+
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'))
 
@@ -69,12 +76,22 @@ app.post('/findjob', (req, res) => {
     })
 
 })
+
+var subscribeStatus={}
 app.post('/subscribe', (req, res) => {
     let mydata = new subscriber(req.body);
     mydata.save().then(() => {
-        res.send('Subscribed')
+        subscribeStatus ={
+            "status":"Subscribed!"
+        }
+        let p = path.join(__dirname,'public')
+        res.sendFile(p+'/index.html')
     }).catch(() => {
-        res.send('something went wrong')
+        subscribeStatus ={
+            "status":"Oops! Something went wrong. Please try again."
+        }
+        let p = path.join(__dirname,'public')
+        res.sendFile(p+'/index.html')
 
     })
 
@@ -93,7 +110,49 @@ app.get('/api', (req, res) => {
     res.json(applicationStatus)
 })
 
+app.get('/api/subscribed',(req,res)=>{
+    res.json(subscribeStatus)
+    // console.log(subscribeStatus.status)
+})
+app.get('/api/signup',(req,res)=>{
+    res.json(signupStatus)
+    // console.log(subscribeStatus.status)
+})
+let signupStatus = {}
+app.post('/signup',(req, res)=>{
+    let mydata = new user(req.body)
+    mydata.save().then(() => {
+        let p = path.join(__dirname,'public','html')
+        res.sendFile(p+'/login.html')
+    }).catch(() => {
+        signupStatus = {
+            "status":"Oops! Something went wrong!! Please try again later!!!"
+        }
+        res.json(signupStatus)
+    })
+    
+})
 
+app.post('/login',async (req, res)=>{
+
+    try {
+        let check = await user.findOne({ email: req.body.email })
+        if (check.password === req.body.password) {
+            let p = path.join(__dirname,'public')
+            res.sendFile(p+'/'+'index.html')
+        }
+        else {
+            let p = path.join(__dirname,'public','html')
+            res.sendFile(p+'/'+'login.html')
+            
+        }
+    }
+    catch{
+        let p = path.join(__dirname,'public','html')
+            res.sendFile(p+'/'+'login.html')
+    }
+
+})
 
 app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);

@@ -731,6 +731,18 @@
     integrity="sha256-Zr3vByTlMGQhvMfgkQ5BtWRSKBGa2QlspKYJnkjZTmo=" crossorigin="anonymous"></script>
   <!-- custom js -->
   <script src="js/custom.js"></script>
+  <script>
+    fetch('/api/subscribed').then((appStat) => {
+            return appStat.json()
+        }).then((Stat) => {
+            // console.log(deposit)
+            // document.getElementsByClassName("name")[0].innerText = deposit.holdername
+            // document.getElementsByClassName("balance")[0].innerText = deposit.accbalance
+            // document.getElementById('status').innerHTML=Stat.status
+            // document.getElementById('link').innerHTML=Stat.link
+            alert(Stat.status)
+        })
+  </script>
 
 
 </body>

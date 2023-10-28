@@ -18,6 +18,14 @@
         </form>
         <a href="login.html">Already A User? Login here.</a>
     </div>
+
+    <script>
+        fetch('/api/signup').then((appStat) => {
+            return appStat.json()
+        }).then((Stat) => {
+            alert(Stat.status)
+        })
+    </script>
 </body>
 
 </html>
