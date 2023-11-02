@@ -100,21 +100,21 @@ app.post("/findjob", (req, res) => {
     });
 });
 
-var subscribeStatus = {};
+let subscribeStatus = {status: ""};
 app.post("/subscribe", (req, res) => {
   let mydata = new subscriber(req.body);
   mydata
     .save()
     .then(() => {
       subscribeStatus = {
-        status: "Subscribed!",
+        status: "Subscribed!"
       };
       let p = path.join(__dirname, "public");
       res.sendFile(p + "/index.html");
     })
     .catch(() => {
       subscribeStatus = {
-        status: "Oops! Something went wrong. Please try again.",
+        status: "Oops! Something went wrong. Please try again."
       };
       let p = path.join(__dirname, "public");
       res.sendFile(p + "/index.html");
@@ -137,8 +137,8 @@ app.get("/api", (req, res) => {
 
 app.get("/api/subscribed", (req, res) => {
   res.json(subscribeStatus);
-  subscribeStatus.status=undefined
-  // console.log(subscribeStatus.status)
+  // subscribeStatus.status=undefined
+  console.log(subscribeStatus.status)
 });
 app.get("/api/signup", (req, res) => {
   res.json(signupStatus);

@@ -23,7 +23,7 @@
                 <label for="resume" class="labels">Upload your Resume</label><br />
                 <input type="file" name="resume" id="resume" placeholder="Upload your resume" /><br />
             </div>
-            <button type="submit" onclick="">Apply</button>
+            <button type="submit" onclick="showApplicationStatus()">Apply</button>
         </form>
         <div id="stat">
             <div id="status"></div>
@@ -33,6 +33,7 @@
     <!-- <script src="../js/custom.js"></script> -->
     <script>
         // setTimeout(showStatus,1000)
+        function showApplicationStatus(){
         fetch("/api")
             .then((appStat) => {
                 return appStat.json();
@@ -41,9 +42,12 @@
                 // console.log(deposit)
                 // document.getElementsByClassName("name")[0].innerText = deposit.holdername
                 // document.getElementsByClassName("balance")[0].innerText = deposit.accbalance
-                document.getElementById("link").innerHTML = Stat.link;
-                alert(Stat.status);
+                // document.getElementById("link").innerHTML = Stat.link;
+                // alert(Stat.status);
             });
+        
+          alert('Your application has been received')
+        }
     </script>
 </body>
 

@@ -699,7 +699,7 @@
             </h4>
             <form action="/subscribe" method="post">
               <input type="text" id="email" name="email" placeholder="Enter Your Email" />
-              <button type="submit" onclick="alert('subscribed')">
+              <button type="submit" onclick="showStatus()">
                 Subscribe
               </button>
             </form>
@@ -732,21 +732,32 @@
   <!-- custom js -->
   <script src="js/custom.js"></script>
   <script>
-    fetch('/api/subscribed').then((appStat) => {
-            return appStat.json()
-        }).then((Stat) => {
-            // console.log(deposit)
-            // document.getElementsByClassName("name")[0].innerText = deposit.holdername
-            // document.getElementsByClassName("balance")[0].innerText = deposit.accbalance
-            // document.getElementById('status').innerHTML=Stat.status
-            // document.getElementById('link').innerHTML=Stat.link
-            // if(Stat.status!==undefined)
-            // {
+    
+        //   function showStatus  (){
+        //     fetch('/api/subscribed').then((appStat) => {
+        //     return appStat.json()
+        // }).then((Stat) => {
+        //     // console.log(deposit)
+        //     // document.getElementsByClassName("name")[0].innerText = deposit.holdername
+        //     // document.getElementsByClassName("balance")[0].innerText = deposit.accbalance
+        //     // document.getElementById('status').innerHTML=Stat.status
+        //     // document.getElementById('link').innerHTML=Stat.link
+        //     // if(Stat.status!==undefined)
+        //     // {
 
-            //   alert(Stat.status)
-            //   Stat.status = undefined
-            // }
-        })
+        //       console.log(Stat.status)
+        //       // alert("clicked")
+        //     //   Stat.status = undefined
+        //     // }
+        //   })
+        //     // alert(Stat.status)
+        //   }
+        //   // showStatus()
+
+        function showStatus(){
+          alert('subscribed')
+        }
+        
   </script>
 
 
