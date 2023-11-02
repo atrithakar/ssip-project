@@ -50,7 +50,7 @@ var applicationresp = new mongoose.Schema({
 });
 var application = mongoose.model("application", applicationresp);
 
-const hostname = "127.0.0.1";
+let hostname = "127.0.0.1";
 const port = 3000;
 
 app.get("/", (req, res) => {
@@ -91,10 +91,12 @@ app.post("/findjob", (req, res) => {
       findJobStatus = {
         status: "Your application has been received",
       };
-      res.send("ok");
+      let p = path.join(__dirname,'public','index.html')
+      res.sendFile(p);
     })
     .catch(() => {
-      res.send("not ok");
+      let p = path.join(__dirname,'public','index.html')
+      res.sendFile(p);
     });
 });
 
@@ -155,7 +157,8 @@ app.post("/signup", (req, res) => {
       signupStatus = {
         status: "Oops! Something went wrong!! Please try again later!!!",
       };
-      res.json(signupStatus);
+      let p = path.join(__dirname, "public", "html");
+      res.sendFile(p + "/login.html");
     });
 });
 
@@ -177,6 +180,8 @@ app.post("/login", async (req, res) => {
     res.sendFile(p + "/" + "login.html");
   }
 });
+
+hostname= '192.168.131.236'
 
 app.listen(port, hostname, () => {
   // console.log(`Server running at http://${hostname}:3000/`);
